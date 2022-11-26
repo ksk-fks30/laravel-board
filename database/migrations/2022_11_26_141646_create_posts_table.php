@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('thread_id')->index();
 
+            $table->unsignedBigInteger('number')->index()->comment('番号(thread内)');
             $table->text('body')->comment('本文');
 
             $table->dateTime('posted_at')->index()->comment('投稿日時');
