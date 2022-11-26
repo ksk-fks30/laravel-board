@@ -13,20 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->foreignId('thread_id')->index();
 
-            $table->string('email')->index();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->text('body')->comment('本文');
 
-            $table->unsignedTinyInteger('role')->default(config('auth.roles.admin'));
+            $table->dateTime('posted_at')->index()->comment('投稿日時');
+            $table->string('ip_address', 20)->comment('IPアドレス');
 
-            $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
         });
+
+        DB::statement("ALTER TABLE posts ADD FULLTEXT index index_body (body) with parser ngram");
     }
 
     /**
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('posts');
     }
 };
