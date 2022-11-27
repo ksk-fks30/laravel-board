@@ -23,6 +23,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index');
+        // 最新順
+        $latest_threads = $this->thread_service->getLatest(config('const.top.latest_threads_limit'));
+        // 書き込み数ランキング
+        $post_count_ranking_threads = $this->thread_service
+            ->getRankingOfPostCount(config('const.top.post_count_ranking_threads_limit'));
+
+        return view('index', compact('latest_threads', 'post_count_ranking_threads'));
     }
 }
