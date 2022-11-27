@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
+// スレッド
 Route::prefix('threads')->controller(ThreadController::class)->group(function () {
     Route::get('show/{thread}',  'show')->name('threads.show');
 
@@ -25,6 +26,7 @@ Route::prefix('threads')->controller(ThreadController::class)->group(function ()
     Route::post('store',  'store')->name('threads.store');
 });
 
+// 投稿
 Route::prefix('posts')->controller(PostController::class)->group(function () {
     Route::post('store/{thread}', 'store')->name('posts.store');
 });
