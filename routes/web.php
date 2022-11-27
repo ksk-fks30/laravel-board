@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ThreadController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,8 +19,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::prefix('threads')->controller(ThreadController::class)->group(function () {
-    Route::get('show/{id}',  'show')->name('threads.show');
+    Route::get('show/{thread}',  'show')->name('threads.show');
 
-    Route::get('create',  'create')->name('threads.create');
-    Route::post('register',  'register')->name('threads.register');
+    Route::get('register',  'register')->name('threads.register');
+    Route::post('store',  'store')->name('threads.store');
+});
+
+Route::prefix('posts')->controller(PostController::class)->group(function () {
+    Route::post('store/{thread}', 'store')->name('posts.store');
 });

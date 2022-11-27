@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\Thread\NotFoundThreadException;
 use App\Http\Requests\StoreThreadRequest;
+use App\Models\Thread;
 use App\Units\ThreadUnit;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -21,16 +21,14 @@ class ThreadController extends Controller
     }
 
     /**
-     * スレッド詳細を表示
+     * スレッドの詳細を表示
      *
-     * @param $id
+     * @param Thread $thread
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      * @throws NotFoundThreadException
      */
-    public function show($id)
+    public function show(Thread $thread)
     {
-        $thread = $this->thread_unit->thread_service->find($id);
-
         if ($thread === null) {
             throw new NotFoundThreadException();
         }
@@ -46,7 +44,7 @@ class ThreadController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function create()
+    public function register()
     {
         return view('thread.create');
     }
@@ -58,7 +56,7 @@ class ThreadController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Throwable
      */
-    public function register(StoreThreadRequest $request)
+    public function store(StoreThreadRequest $request)
     {
         $params = $request->all();
 
@@ -77,10 +75,10 @@ class ThreadController extends Controller
             Log::error($e->getTraceAsString());
 
             return redirect()->back()->withInput()
-                ->withErrors(['スレッドの登録に失敗しました。']);
+                ->withErrors([trans('message.error.thread_create_failed')]);
         }
 
         return redirect(route('threads.show', $thread->id))
-            ->with('message', 'スレッドの登録に成功しました。');
+            ->with('message', trans('message.success.thread_create'));
     }
 }

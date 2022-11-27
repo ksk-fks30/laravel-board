@@ -8,7 +8,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('threads.create') }}">スレッドを作る</a>
+                        <a class="nav-link" href="{{ route('threads.register') }}">スレッドを作る</a>
                     </li>
                 </ul>
             </div>

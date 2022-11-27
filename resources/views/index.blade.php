@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <h1 class="h2">最新スレッド一覧</h1>
             <table class="table table-bordered mt-4">
                 <thead>
@@ -23,7 +23,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <h1 class="h2">投稿数ランキング(Top{{ config('const.top.post_count_ranking_threads_limit') }})</h1>
             <table class="table table-bordered mt-4">
                 <thead>
@@ -44,10 +44,10 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-sm-4">
-            <h1 class="h2">最新の書き込み</h1>
+{{--        <div class="col-sm-4">--}}
+{{--            <h1 class="h2">最新の書き込み</h1>--}}
 
-        </div>
+{{--        </div>--}}
     </div>
 
 @endsection

@@ -9,7 +9,7 @@
 
             <div class="card mt-3">
                 <div class="card-body">
-                    <form method="post" action="{{ route('threads.register') }}"
+                    <form method="post" action="{{ route('threads.store') }}"
                           onsubmit="return confirm('本当にこの内容で登録してよろしいですか？');"
                     >
                         @csrf

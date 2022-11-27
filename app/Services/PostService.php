@@ -28,4 +28,17 @@ class PostService extends BaseService
             ->with($with)
             ->paginate($paginate_size);
     }
+
+    /**
+     * スレッド内で最大の番号を返す
+     *
+     * @param $thread_id
+     * @return mixed
+     */
+    public function maxNumberInThread($thread_id)
+    {
+        return Post::query()
+            ->where('thread_id', $thread_id)
+            ->max('number');
+    }
 }
